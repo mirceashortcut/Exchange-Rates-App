@@ -1,4 +1,4 @@
-package com.example.exhangeratesapp.ui.theme
+package com.example.exchangeratesapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

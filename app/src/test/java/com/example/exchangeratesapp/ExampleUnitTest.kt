@@ -1,4 +1,4 @@
-package com.example.exhangeratesapp
+package com.example.exchangeratesapp
 
 import org.junit.Test
 
