@@ -1,4 +1,4 @@
-package com.example.exchangeratesapp.home
+package com.example.exchangeratesapp.ui.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,8 +9,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.exchangeratesapp.R
+import com.example.exchangeratesapp.ui.theme.ExchangeRatesAppTheme
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel) {
@@ -50,5 +52,13 @@ private fun ExchangeCurrency(modifier: Modifier, symbol: String, value: Float) {
     Row(modifier = modifier) {
         Text(text = "$symbol - ")
         Text(text = value.toString())
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    ExchangeRatesAppTheme {
+        HomeScreen(uiState = HomeViewModel.UiState())
     }
 }

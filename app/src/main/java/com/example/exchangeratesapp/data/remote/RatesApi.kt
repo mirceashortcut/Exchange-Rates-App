@@ -1,5 +1,6 @@
-package com.example.exchangeratesapp.rates
+package com.example.exchangeratesapp.data.remote
 
+import com.example.exchangeratesapp.rates.ExchangeRatesResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
