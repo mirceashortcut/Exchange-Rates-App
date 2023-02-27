@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Exchange Rates App</string>
 
+    <string name="settings_screen">Settings Screen</string>
+    <string name="home_screen">Home Screen</string>
+
     <string name="exchange_rates_title">Exchange rates for %s</string>
+    <string name="settings_preferred_coin">Preferred coin: </string>
+    <string name="currency">Currency</string>
 </resources>
