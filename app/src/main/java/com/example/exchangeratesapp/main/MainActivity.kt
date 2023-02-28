@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.exchangeratesapp.ui.home.HomeScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.exchangeratesapp.navigation.NavHost
 import com.example.exchangeratesapp.ui.theme.ExchangeRatesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,12 +18,14 @@ class MainActivity() : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ExchangeRatesAppTheme {
+                val navController = rememberNavController()
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    HomeScreen(viewModel = hiltViewModel())
+                    NavHost(navController = navController)
                 }
             }
         }

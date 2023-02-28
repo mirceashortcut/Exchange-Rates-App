@@ -10,25 +10,29 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.exchangeratesapp.R
+import com.example.exchangeratesapp.ui.common.SharedViewModel
 import com.example.exchangeratesapp.ui.theme.ExchangeRatesAppTheme
 
 @Composable
-fun SettingsScreen(viewModel: SettingsViewModel) {
+fun SettingsScreen(viewModel: SharedViewModel, navController: NavHostController) {
     val uiState by viewModel.uiState.collectAsState()
 
-    SettingsScreen(uiState = uiState, uiEvents = viewModel.uiEvents)
+    SettingsScreen(uiState = uiState, uiEvents = viewModel.uiEvents, navController = navController)
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun SettingsScreen(
     modifier: Modifier = Modifier,
-    uiState: SettingsViewModel.UiState,
-    uiEvents: SettingsViewModel.UiEvents
+    uiState: SharedViewModel.UiState,
+    uiEvents: SharedViewModel.UiEvents,
+    navController: NavHostController
 ) {
     var expanded by remember {
         mutableStateOf(false)
@@ -41,7 +45,7 @@ private fun SettingsScreen(
         TopAppBar(
             title = { Text(text = stringResource(id = R.string.settings_screen)) },
             navigationIcon = {
-                IconButton(onClick = {}) {
+                IconButton(onClick = { navController.popBackStack() }) {
                     Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Go Back")
                 }
             }
@@ -68,12 +72,12 @@ private fun SettingsScreen(
                 )
 
                 ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                    uiState.currenciesSymbols.forEach { selectedOption ->
+                    uiState.currencies.forEach { selectedOption ->
                         DropdownMenuItem(onClick = {
-                            uiEvents.onCurrencyChanged(selectedOption)
+                            uiEvents.onCurrencyChanged(selectedOption.symbol)
                             expanded = false
                         }) {
-                            Text(text = selectedOption)
+                            Text(text = selectedOption.symbol)
                         }
                     }
                 }
@@ -87,8 +91,9 @@ private fun SettingsScreen(
 fun SettingsScreenPreview() {
     ExchangeRatesAppTheme {
         SettingsScreen(
-            uiState = SettingsViewModel.UiState(),
-            uiEvents = SettingsViewModel.UiEvents()
+            uiState = SharedViewModel.UiState(),
+            uiEvents = SharedViewModel.UiEvents(),
+            navController = NavHostController(LocalContext.current)
         )
     }
 }

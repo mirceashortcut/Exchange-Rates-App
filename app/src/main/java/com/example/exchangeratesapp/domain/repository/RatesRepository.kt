@@ -3,5 +3,5 @@ package com.example.exchangeratesapp.domain.repository
 import com.example.exchangeratesapp.rates.ExchangeRatesResponse
 
 interface RatesRepository {
-    suspend fun getExchangeRatesEur(base: String): ExchangeRatesResponse
+    suspend fun getExchangeRates(base: String): ExchangeRatesResponse
 }
