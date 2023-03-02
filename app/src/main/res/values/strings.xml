@@ -6,5 +6,7 @@
 
     <string name="exchange_rates_title">Exchange rates for %s</string>
     <string name="settings_preferred_coin">Preferred coin: </string>
+    <string name="settings_refresh_time">Refresh time: </string>
+
     <string name="currency">Currency</string>
 </resources>

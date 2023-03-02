@@ -1,5 +1,6 @@
 package com.example.exchangeratesapp.di
 
+import android.util.Log
 import com.example.exchangeratesapp.data.remote.RatesApi
 import com.example.exchangeratesapp.data.repository.RatesRepositoryImpl
 import com.example.exchangeratesapp.domain.repository.RatesRepository
@@ -32,7 +33,8 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor()
+        return HttpLoggingInterceptor { Log.d("API", it) }
+            .setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
     @Provides
@@ -44,8 +46,8 @@ class NetworkModule {
         return OkHttpClient.Builder()
             .addInterceptor(repositoryInterceptor)
             .addInterceptor(httpLoggingInterceptor)
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(120, TimeUnit.SECONDS)
             .build()
     }
 
@@ -81,7 +83,7 @@ class NetworkModule {
     }
 
     companion object {
-        const val API_KEY = "lRIDUe5i2XX8cujZuNf8xE0naC8cSyn5"
+        const val API_KEY = "Fcyc2zPHd59x8XlSBIBJui40iFwQLBL9"
         const val BASE_URL = "https://api.apilayer.com"
     }
 }
