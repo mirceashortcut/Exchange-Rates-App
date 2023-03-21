@@ -2,8 +2,6 @@ package com.example.exchangeratesapp.di
 
 import android.util.Log
 import com.example.exchangeratesapp.data.remote.RatesApi
-import com.example.exchangeratesapp.data.repository.RatesRepositoryImpl
-import com.example.exchangeratesapp.domain.repository.RatesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -74,12 +72,6 @@ class NetworkModule {
     @Singleton
     fun provideRatesApi(retrofit: Retrofit): RatesApi {
         return retrofit.create(RatesApi::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideRatesRepository(ratesApi: RatesApi): RatesRepository {
-        return RatesRepositoryImpl(ratesApi)
     }
 
     companion object {

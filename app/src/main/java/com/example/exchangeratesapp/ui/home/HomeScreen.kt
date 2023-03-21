@@ -24,16 +24,17 @@ import com.example.exchangeratesapp.ui.theme.ExchangeRatesAppTheme
 @Composable
 fun HomeScreen(viewModel: SharedViewModel, navController: NavHostController) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val currencyState by viewModel.selectedCurrency.collectAsStateWithLifecycle()
+//    val currencyState by viewModel.selectedCurrency.collectAsStateWithLifecycle()
 
-    HomeScreen(uiState = uiState, currencyState = currencyState, navController = navController)
+    HomeScreen(uiState = uiState, uiEvents = viewModel.uiEvents,  navController = navController)
 }
 
 @Composable
 private fun HomeScreen(
     modifier: Modifier = Modifier,
     uiState: SharedViewModel.UiState,
-    currencyState: String,
+    uiEvents: SharedViewModel.UiEvents,
+//    currencyState: String,
     navController: NavHostController
 ) {
     Box(modifier = modifier.fillMaxSize()) {
@@ -53,7 +54,7 @@ private fun HomeScreen(
 
             Text(
                 modifier = Modifier.padding(10.dp),
-                text = stringResource(id = R.string.exchange_rates_title, currencyState),
+                text = stringResource(id = R.string.exchange_rates_title, uiState.selectedCurrency),
                 fontSize = 20.sp
             )
 
@@ -95,7 +96,8 @@ fun HomeScreenPreview() {
     ExchangeRatesAppTheme {
         HomeScreen(
             uiState = SharedViewModel.UiState(),
-            currencyState = "EUR",
+            uiEvents = SharedViewModel.UiEvents(),
+//            currencyState = "EUR",
             navController = NavHostController(context = LocalContext.current)
         )
     }
